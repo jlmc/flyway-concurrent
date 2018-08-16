@@ -23,7 +23,17 @@ docker stack deploy --compose-file docker-stack.yml fc
 
 
 # docker swarm leave --force
+
+# docker stack rm fc
 ```
 
 
 http://localhost:8080/flyway-concurrent/resources/matrices
+
+
+``` bash
+curl -i -H "Xtenant: client5" http://localhost:8080/flyway-concurrent/resources/matrices
+
+
+
+```

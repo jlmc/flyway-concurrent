@@ -11,11 +11,11 @@ public class FlywayHibernateIntegrator implements Integrator {
     public void integrate(Metadata metadata,
                           SessionFactoryImplementor sessionFactoryImplementor,
                           SessionFactoryServiceRegistry sessionFactoryServiceRegistry) {
-        Migrator.instance().migrate();
+        Migrator.migrate();
     }
 
     @Override
-    public void disintegrate(SessionFactoryImplementor sessionFactoryImplementor, SessionFactoryServiceRegistry sessionFactoryServiceRegistry) {
-
+    public void disintegrate(SessionFactoryImplementor sessionFactoryImplementor,
+                             SessionFactoryServiceRegistry sessionFactoryServiceRegistry) {
     }
 }

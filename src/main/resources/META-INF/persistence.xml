@@ -17,11 +17,10 @@
             <property name="hibernate.format_sql" value="false"/>
 
             <!-- Support for SCHEMA based multitenancy -->
-            <!--
-            <property name="hibernate.multi_tenant_connection_provider" value="io.costax.multitenancy.MultiTenantConnectionProviderImpl"/>
-            <property name="hibernate.tenant_identifier_resolver" value="io.costax.multitenancy.CurrentTenantIdentifierResolverImpl"/>
+            <property name="hibernate.multi_tenant_connection_provider" value="io.costax.tenancy.boundary.MultiTenantConnectionProviderImpl"/>
+            <property name="hibernate.tenant_identifier_resolver" value="io.costax.tenancy.boundary.CurrentTenantIdentifierResolverImpl"/>
             <property name="hibernate.multiTenancy" value="SCHEMA"/>
-            -->
+
         </properties>
     </persistence-unit>
 </persistence>
