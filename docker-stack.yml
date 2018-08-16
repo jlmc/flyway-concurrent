@@ -1,0 +1,39 @@
+version: '3.6'
+
+services:
+  flyway-concurrent-postgres:
+    image: postgres:10.5
+    environment:
+      - POSTGRES_DB=demodb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - .flyway-concurrent-postgres-stack:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - demo-network
+
+  flyway-concurrent-server:
+    image: costax-flyway-concurrent:demo
+    environment:
+      - POSTGRES_PORT_5432_TCP_ADDR=flyway-concurrent-postgres
+      - POSTGRES_PORT_5432_TCP_PORT=5432
+      - POSTGRES_DATABASE=demodb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_ADMIN_USER=postgres
+      - POSTGRES_ADMIN_PASSWORD=postgres
+    depends_on:
+      - flyway-concurrent-postgres
+    ports:
+      - 8080:8080
+      - 9990:9990
+    networks:
+      - demo-network
+    deploy:
+      replicas: 8
+
+networks:
+  demo-network:
+    driver: overlay

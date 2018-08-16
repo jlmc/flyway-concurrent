@@ -13,14 +13,6 @@ function wait_for_server() {
   done
 }
 
-echo "=====> Install Keycloak Adapter"
-curl --location --output /opt/jboss/wildfly/keycloak-wildfly-adapter-dist-3.4.3.Final.zip --url \
-    https://downloads.jboss.org/keycloak/3.4.3.Final/adapters/keycloak-oidc/keycloak-wildfly-adapter-dist-3.4.3.Final.zip \
-    && unzip /opt/jboss/wildfly/keycloak-wildfly-adapter-dist-3.4.3.Final.zip  -d /opt/jboss/wildfly \
-    && /opt/jboss/wildfly/bin/jboss-cli.sh --file=/opt/jboss/wildfly/bin/adapter-elytron-install-offline.cli \
-    && rm -rf /opt/jboss/wildfly/keycloak-wildfly-adapter-dist-3.4.3.Final.zip
-
-
 echo "=====> Starting WildFly server"
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG &
 
@@ -32,9 +24,6 @@ curl --location --output $(pwd)/postgresql-42.1.4.jar --url https://jdbc.postgre
 
 echo "=====> Configure PostgreSQL JDBC driver module and add datasource"
 $JBOSS_CLI -c --file=`dirname "$0"`/configure-postgres.cli
-
-echo "=====> Configure Undertow custom definitions"
-$JBOSS_CLI -c --file=`dirname "$0"`/configure-undertow.cli
 
 echo "=====> Add Administration Wildfly user"
 /opt/jboss/wildfly/bin/add-user.sh admin admin
