@@ -1,0 +1,15 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Maven
+target/
+
+# Docker volumes
+.ey-keycloak-database/
+.ey-riskcockpit-database/
